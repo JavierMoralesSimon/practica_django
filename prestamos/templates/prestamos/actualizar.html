@@ -1,0 +1,35 @@
+{% extends 'proyecto/layout.html' %}
+
+{% block contenido %}
+    <h1 style="text-align:center">¿Estás seguro de querer devolver este libro?</h1>
+    <table class="table table-info table-striped" style="margin:auto">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>TÍTULO</th>
+                <th>AUTOR</th>
+                <th>CATEGORÍA</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>{{ libro.id }}</td>
+                <td>{{ libro.titulo }}</td>
+                <td>{{ libro.autor }}</td>
+                <td>{{ libro.categoria }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block formulario %}
+    <form action="{% url 'prestamos.actualizar' prestamo.id %}" method="post">
+        {% csrf_token %}
+        <div class="centrarBotones">
+            <input type="submit" class="btn btn-outline-danger" value="Sí, devolver">
+        </div>
+    </form>
+    <div class="centrarBotones">
+        <a class="nav-link" href="{% url 'prestamos.index' %}"><button class="btn btn-outline-secondary">No, volver a inicio</button></a>
+    </div>
+{% endblock %}

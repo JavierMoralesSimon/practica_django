@@ -1,0 +1,26 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>El Rincón del Lector</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">
+</head>
+<body>
+    {% include 'proyecto/partials/nav.html' %}
+    <div class="container text-center mt-4 mb-2 d-flex flex-column gap-4">
+        {% block contenido %}{% endblock %}
+    </div>
+    <div class="container mt-4 mb-2 d-flex flex-column gap-4" id="formulario" style="padding: 10px;">
+        {% block formulario %}{% endblock %}
+    </div>
+    {% if user.username != 'admin' %}
+        {% include 'proyecto/partials/footer.html' %}
+    {% endif %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

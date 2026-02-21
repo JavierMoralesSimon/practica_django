@@ -1,0 +1,30 @@
+.row{
+    display: flex;
+    justify-content: space-around;
+}
+
+a{
+    text-decoration: none;
+}
+
+.subfooter{
+    text-align: left;
+}
+
+#sub2footer2{
+    display: flex;
+    justify-content: center;
+}
+
+#sub3footer2{
+    width: fit-content;
+}
+
+#sub2footer3{
+    display: flex;
+    justify-content: flex-end;
+}
+
+#sub3footer3{
+    width: fit-content;
+}

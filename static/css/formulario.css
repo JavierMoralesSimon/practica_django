@@ -1,0 +1,9 @@
+#formulario{
+    width: fit-content;
+    text-align: center;
+}
+
+.centrarBotones{
+    display: flex;
+    justify-content: center;
+}

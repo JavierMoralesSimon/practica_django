@@ -1,0 +1,87 @@
+{% extends 'proyecto/layout.html' %}
+
+{% block contenido %}
+    {% if messages %}
+        <div class="container mt-2">
+            {% for message in messages %}
+                <div class="alert 
+                            {% if message.tags == 'error' %}alert-danger{% elif message.tags == 'success' %}alert-success{% elif message.tags == 'warning' %}alert-warning{% else %}alert-info{% endif %} 
+                            alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+    <h1>Catálogo de libros</h1>
+    {% if libros %}
+        <table class="table table-info table-striped" style="margin:auto">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>TÍTULO</th>
+                    <th>AUTOR</th>
+                    <th>DISPONIBILIDAD</th>
+                    <th>CATEGORÍA</th>
+                    <th>OPERACIONES</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for libro in libros %}
+                    <tr>
+                        <td>{{ libro.id }}</td>
+                        <td>{{ libro.titulo }}</td>
+                        <td>{{ libro.autor }}</td>
+                        <td>{% if libro.disponible %}
+                                Disponible
+                            {% else %}
+                                Alquilado
+                            {% endif %}
+                        </td>
+                        <td>{{ libro.categoria }}</td>
+                        <td style="width: fit-content;">
+                            {% if libro.disponible %}
+                                <a href="{% url 'libros.actualizar' libro.id %}"><button class="btn btn-outline-success" style="margin-right:5px">Actualizar</button></a>
+                                <a href="{% url 'libros.borrar' libro.id %}"><button class="btn btn-outline-danger" style="margin-right:5px">Borrar</button></a>
+                            {% else %}
+                                -
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>El catálogo de libros está vacío.</p>
+    {% endif %}
+    <a href="{% url 'libros.crear' %}"><button class="btn btn-outline-primary">Añadir un libro</button></a>
+    <h1>Listado de categorías</h1>
+    {% if categorias %}
+        <table class="table table-info table-striped" style="margin:auto">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>NOMBRE</th>
+                    <th>DESCRIPCIÓN</th>
+                    <th>OPERACIONES</th>
+                </tr>
+            </thead>
+            <tbody class="table-group-divider">
+                {% for categoria in categorias %}
+                    <tr>
+                        <td>{{ categoria.id }}</td>
+                        <td>{{ categoria.nombre }}</td>
+                        <td>{{ categoria.descripcion }}</td>
+                        <td style="width: fit-content;">
+                            <a href="{% url 'categorias.actualizar' categoria.id %}"><button class="btn btn-outline-success" style="margin-right:5px">Actualizar</button></a>
+                            <a href="{% url 'categorias.borrar' categoria.id %}"><button class="btn btn-outline-danger" style="margin-right:5px">Borrar</button></a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>El listado de categorías está vacío.</p>
+    {% endif %}
+    <a href="{% url 'categorias.crear' %}"><button class="btn btn-outline-primary">Añadir una categoría</button></a>
+{% endblock %}

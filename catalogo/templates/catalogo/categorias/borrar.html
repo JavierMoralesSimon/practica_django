@@ -1,0 +1,35 @@
+{% extends 'proyecto/layout.html' %}
+
+{% block contenido %}
+    <h1 style="text-align:center">¿Estás seguro de querer borrar esta categoría?</h1>
+    <h3 style="text-align:center">Si lo haces se borrarán todos los libros que usen la misma.</h3>
+    <table class="table table-info table-striped" style="margin:auto">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>DESCRIPCIÓN</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr>
+                <td>{{ categoria.id }}</td>
+                <td>{{ categoria.nombre }}</td>
+                <td>{{ categoria.descripcion }}</td>
+
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block formulario %}
+    <form action="{% url 'categorias.borrar' categoria.id %}" method="post">
+        {% csrf_token %}
+        <div class="centrarBotones">
+            <input type="submit" class="btn btn-outline-danger" value="Sí, borrar">
+        </div>
+    </form>
+    <div class="centrarBotones">
+        <a class="nav-link" href="{% url 'catalogo.index' %}"><button class="btn btn-outline-secondary">No, volver a inicio</button></a>
+    </div>
+{% endblock %}

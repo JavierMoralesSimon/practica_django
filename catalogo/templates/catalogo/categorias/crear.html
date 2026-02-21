@@ -1,0 +1,17 @@
+{% extends 'proyecto/layout.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block formulario %}
+    <h1 style="text-align:center">Añadir una categoría</h1>
+    <form action="{% url 'categorias.crear' %}" method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="centrarBotones">
+            <input type="submit" class="btn btn-outline-primary" value="Añadir">
+        </div>
+    </form>
+    <div class="centrarBotones">
+        <a class="nav-link" href="{% url 'catalogo.index' %}"><button class="btn btn-outline-secondary">Volver a inicio</button></a>
+    </div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'proyecto/layout2.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block formulario %}
+    <h1 style="text-align:center">Entra en tu biblioteca</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form|crispy }}
+        <div class="centrarBotones">
+            <input type="submit" class="btn btn-outline-primary" value="Iniciar sesión">
+        </div>
+    </form>
+    <div class="centrarBotones">
+        <a class="nav-link" href="{% url 'cuentas.index' %}"><button class="btn btn-outline-secondary">Volver a la página principal</button></a>
+    </div>
+{% endblock %}
